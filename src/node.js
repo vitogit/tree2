@@ -39,3 +39,36 @@ Node.prototype.addSibling = function(node) {
     this.addChildren(node)
   }
 };
+
+Node.prototype.removeChild = function(node) {
+  var index = -1
+  for (var i=0; i< this.children.length ; i++ ) {
+      if (this.children[i] === node) {
+        index = i
+        break
+      }
+  }
+  if (index > -1) {
+    this.children.splice(index, 1);
+  }
+};
+
+Node.prototype.convertToChildren = function() {
+  this.parent.removeChild(this)
+  this.parent = this.previous
+  this.parent.addChildren(this)
+};
+
+Node.prototype.convertToSibling = function() {
+  this.parent.removeChild(this)
+  this.parent = this.parent.parent
+  this.parent.addChildren(this)
+};
+
+Node.prototype.printChildren = function() {
+  var result = ''
+  for (var i=0; i< this.children.length ; i++ ) {
+    result += this.children[i].text+' '
+  }
+  return result
+};

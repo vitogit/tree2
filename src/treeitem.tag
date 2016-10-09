@@ -1,6 +1,6 @@
 <treeitem>
   <div >
-    <span name="input_text" class="input_text" contenteditable="true" onkeypress={keyHandler}>
+    <span name="input_text" class="input_text" contenteditable="true" onkeydown={keyHandler}>
       { node.text }
     </span>
     <span class="actions">
@@ -15,13 +15,22 @@
     this.node = opts.node || new Node()
     addChildren() {
       var text = this.input_text.innerHTML
-      this.node.addChildren({text:'children of:'+this.node.text})
+      this.node.addChildren({text:''})
     }
 
     addSibling() {
       var text = this.input_text.innerHTML
-      console.dir(this.node)
-      this.node.addSibling({text:'sibling of:'})
+      this.node.addSibling({text:''})
+    }
+
+    convertToChildren() {
+      this.node.convertToChildren()
+      this.update()
+    }
+
+    convertToSibling() {
+      this.node.convertToSibling()
+      this.parent.parent.update() //todo: improve this
     }
 
     keyHandler(event) {
@@ -37,10 +46,12 @@
         return false
       }
       else if (tabKey && shiftKey) {
+        this.convertToSibling()
         console.log('shift+tab key')
         return false
       }
       else if (tabKey) {
+        this.convertToChildren()
         console.log('tab key')
         return false
       }
