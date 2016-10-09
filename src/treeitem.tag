@@ -3,6 +3,7 @@
     <span name="input_text" class="input_text" contenteditable="true">{ node.text }</span>
     <span class="actions">
       <button onclick={addChildren}>new children</button>
+      <button onclick={addSibling}>new sibling</button>
     </span>
   </div>
   <ul>
@@ -16,6 +17,11 @@
       this.node.addChildren({text:'children of:'+this.node.text})
     }
 
+    addSibling() {
+      var text = this.input_text.innerHTML
+      console.dir(this.node)
+      this.node.addSibling({text:'sibling of:'})
+    }
   </script>
   <style>
     .input_text {
