@@ -23,11 +23,19 @@ describe('node spec', function() {
       expect(parent.children[0].id).to.be.eq(1)
     })
 
+    it('adds a children in a specific position', function() {
+      var parent = new Node()
+      parent.addChildren({id:1})
+      parent.addChildren({id:2})
+      parent.addChildren({id:3},1)
+      expect(parent.children[1].id).to.be.eq(3)
+    })
+
     it('removes a children', function() {
       var parent = new Node()
       parent.addChildren({id:1})
       parent.addChildren({id:2})
-      var firstChild = parent.children[0]
+      var firstChild = parent.children[1]
       parent.removeChild(firstChild)
       expect(parent.children).to.have.lengthOf(1)
       expect(parent.children[0].id).to.be.eq(2)
@@ -51,7 +59,7 @@ describe('node spec', function() {
       var parent = new Node()
       parent.addChildren({id:1})
       parent.addChildren({id:2})
-      var lastchild = parent.children[1]
+      var lastchild = parent.children[0]
       expect(parent.lastChild()).to.be.eq(lastchild)
     })
 
@@ -101,7 +109,7 @@ describe('node spec', function() {
       var parent = new Node()
       parent.addChildren({text:1})
       parent.addChildren({text:2})
-      expect(parent.printChildren()).to.be.eq('1 2 ')
+      expect(parent.printChildren()).to.be.eq('2 1 ')
     })
 
     context('parent without children', function() {
@@ -129,18 +137,18 @@ describe('node spec', function() {
         parent.addChildren({id:1})
         parent.addChildren({id:2})
 
-        firstchild = parent.children[0]
-        lastchild = parent.children[1]
+        firstChild = parent.children[0]
+        lastChild = parent.children[1]
       });
 
-      it('has the correct previous', function() {
-        expect(lastchild.previous).to.be.eq(firstchild)
+      it('sibling has the correct previous', function() {
+        expect(lastChild.previous).to.be.eq(firstChild)
       })
 
       it('adds a sibling correctly', function() {
-        firstchild.addSibling()
+        firstChild.addSibling()
         expect(parent.children).to.have.lengthOf(3)
-        lastchild.addSibling()
+        lastChild.addSibling()
         expect(parent.children).to.have.lengthOf(4)
       })
     })

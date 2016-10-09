@@ -12,24 +12,24 @@ Node.prototype.hasChildren = function() {
 }
 
 Node.prototype.lastChild = function() {
-  return this.children[this.children.length-1]
+  return this.children[0]
 }
 
-Node.prototype.addChildren = function(options) {
+Node.prototype.addChildren = function(options, position) {
   var node = options || {}
+  var position = position || 0
+  var child = new Node(node)
 
-  node.parent = node.parent || this
+  child.parent = child.parent || this
+  child.previous = child.parent
 
-  //the child previous is his parent
-  var childPrevious = this
-
-  //If parent.children >0 then child previous is a sibling not the parent
+  //If parent.children >0 have to change the last child previous
   if (this.hasChildren()) {
-     childPrevious = this.lastChild()
+     var lastChild = this.lastChild()
+     lastChild.previous = child
   }
 
-  node.previous = node.previous || childPrevious
-  this.children.push(new Node(node))
+  this.children.splice(position, 0, child);
 };
 
 Node.prototype.addSibling = function(node) {

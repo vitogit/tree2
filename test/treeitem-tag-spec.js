@@ -1,4 +1,4 @@
-describe('treeitem tag spec', function() {
+describe.skip('treeitem tag spec', function() {
   context('default', function() {
     beforeEach(function() {
       var html = document.createElement('treeitem')

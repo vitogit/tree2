@@ -13,14 +13,17 @@
 
   <script>
     this.node = opts.node || new Node()
+    this.last_id = opts.node.id || 0
     addChildren() {
       var text = this.input_text.innerHTML
-      this.node.addChildren({text:''})
+      this.last_id++
+      var id = this.last_id*100
+      this.node.addChildren({id:id, text:id})
     }
 
     addSibling() {
       var text = this.input_text.innerHTML
-      this.node.addSibling({text:''})
+      this.node.addSibling()
     }
 
     convertToChildren() {
