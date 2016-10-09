@@ -4,7 +4,7 @@ function Node(options) {
   this.text = node.text || ''
   this.parent = node.parent
   this.previous = node.previous
-  this.children = node && node.children || []
+  this.children =  node.children || []
 }
 
 Node.prototype.hasChildren = function() {
@@ -27,5 +27,5 @@ Node.prototype.addChildren = function(node) {
   }
 
   node.previous = node.previous || childPrevious
-  this.children.push(node)
+  this.children.push(new Node(node))
 };

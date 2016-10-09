@@ -1,11 +1,8 @@
 <app>
-  <a href="#" onclick={app_method}>This is the {this.app_var} tag</a>
+  <treeitem node={root_node}></treeitem>
 
   <script>
-    this.app_var = 'example'
-    this.app_method = function app_method(event) {
-      alert('hello')
-    }
+    this.root_node = new Node({text:'root'})
   </script>
 
 </app>
