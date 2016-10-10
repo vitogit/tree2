@@ -12,8 +12,14 @@
   </ul>
 
   <script>
+
     this.node = opts.node || new Node()
     this.last_id = opts.node.id || 0
+
+    this.on('update',function() {
+      this.node = opts.node
+    })
+
     addChildren() {
       var text = this.input_text.innerHTML
       this.last_id++

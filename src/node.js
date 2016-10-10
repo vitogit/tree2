@@ -30,6 +30,7 @@ Node.prototype.addChildren = function(options, position) {
   }
 
   this.children.splice(position, 0, child);
+  return child
 };
 
 Node.prototype.addSibling = function(node) {
